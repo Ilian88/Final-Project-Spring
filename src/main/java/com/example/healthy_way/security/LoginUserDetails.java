@@ -26,15 +26,15 @@ public class LoginUserDetails implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = this.userService.findUserByUsername(username);
 
-        List<GrantedAuthority> authorities = userEntity.getRoles()
-                .stream()
-                .map(r -> new SimpleGrantedAuthority(r.getRole().name()))
-                .collect(Collectors.toList());
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(userEntity.getRole().toString()));
 
-        return new User(
+
+       User user =  new User(
                 userEntity.getUsername(),
                 userEntity.getPassword(),
                 authorities
         );
+
+       return user;
     }
 }

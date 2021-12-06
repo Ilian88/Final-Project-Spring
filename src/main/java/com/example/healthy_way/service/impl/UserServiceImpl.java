@@ -1,13 +1,11 @@
 package com.example.healthy_way.service.impl;
 
 import com.example.healthy_way.model.binding.AddRoleBindingModel;
-import com.example.healthy_way.model.entity.RoleEntity;
 import com.example.healthy_way.model.entity.UserEntity;
 import com.example.healthy_way.model.enums.GenderEnum;
 import com.example.healthy_way.model.enums.RoleEnum;
 import com.example.healthy_way.model.serviceModel.UserServiceModel;
 import com.example.healthy_way.repository.UserRepository;
-import com.example.healthy_way.service.RoleService;
 import com.example.healthy_way.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,14 +18,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper,
-                           RoleService roleService, PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
-        this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -42,7 +38,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(passwordEncoder.encode(userService.getPassword()));
 
             user.setGenderEnum(GenderEnum.valueOf(userService.getGender()))
-                    .setRoles(List.of(roleService.findRole(RoleEnum.USER)));
+                    .setRole(RoleEnum.USER);
 
             this.userRepository.save(user);
         }
@@ -70,15 +66,10 @@ public class UserServiceImpl implements UserService {
         UserEntity user = this.userRepository.findByUsername(addRoleBindingModel.getUsername())
                 .orElse(null); //TODO
 
-        List<RoleEntity> roles =  this.roleService.findRoles(RoleEnum.valueOf(
-          addRoleBindingModel.getRole()
-        ));
-
-        user.setRoles(roles);
+        user.setRole(RoleEnum.valueOf(addRoleBindingModel.getRole()));
 
         this.userRepository.save(user);
 
     }
-
 
 }

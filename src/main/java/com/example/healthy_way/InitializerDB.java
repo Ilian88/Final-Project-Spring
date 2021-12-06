@@ -1,63 +1,73 @@
 package com.example.healthy_way;
 
-import com.example.healthy_way.model.entity.RoleEntity;
+import com.example.healthy_way.model.entity.Article;
+import com.example.healthy_way.model.entity.Recipe;
 import com.example.healthy_way.model.entity.UserEntity;
 import com.example.healthy_way.model.enums.GenderEnum;
 import com.example.healthy_way.model.enums.RoleEnum;
-import com.example.healthy_way.repository.RoleRepository;
+import com.example.healthy_way.repository.ArticleRepository;
+import com.example.healthy_way.repository.RecipeRepository;
 import com.example.healthy_way.repository.UserRepository;
-import com.example.healthy_way.service.RoleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Component
 public class InitializerDB implements CommandLineRunner {
 
-    private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final RoleService roleService;
+    private final ArticleRepository articleRepository;
+    private final RecipeRepository repository;
 
-
-    public InitializerDB(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
-
-        this.roleRepository = roleRepository;
+    public InitializerDB(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                         ArticleRepository articleRepository, RecipeRepository repository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.roleService = roleService;
+        this.articleRepository = articleRepository;
+        this.repository = repository;
     }
 
     @Override
     public void run(String... args) throws Exception {
-
-        if (roleRepository.count() == 0) {
-            RoleEntity admin = new RoleEntity();
-            admin.setRole(RoleEnum.ADMIN);
-
-            RoleEntity moderator = new RoleEntity();
-            moderator.setRole(RoleEnum.MODERATOR);
-
-            RoleEntity user = new RoleEntity();
-            user.setRole(RoleEnum.USER);
-
-            this.roleRepository.saveAll(List.of(admin, moderator, user));
-        }
+        UserEntity user1 = new UserEntity();
 
         if (userRepository.count() == 0) {
-            UserEntity user1 = new UserEntity();
+
             user1.setUsername("Iliyan")
                     .setPassword(passwordEncoder.encode("12345"))
                     .setGenderEnum(GenderEnum.MALE)
                     .setAge(33)
-                    .setRoles(this.roleService.findRoles(RoleEnum.ADMIN))
+                    .setRole(RoleEnum.ADMIN)
                     .setEmail("iliyan.markov@abv.bg");
 
             this.userRepository.save(user1);
         }
 
+        if (articleRepository.count() == 0) {
+            Article article = new Article()
+                    .setAuthor(user1)
+                    .setTitle("First Article")
+                    .setShortDescription("Some short Lorem Ipsum")
+                    .setTextContent("Some long Lorem Ipsum")
+                    .setCreatedOn(LocalDateTime.now());
+
+            this.articleRepository.save(article);
+        }
+
+        if (repository.count() == 0) {
+            Recipe recipe = new Recipe()
+                    .setAuthor(user1)
+                    .setName("Some fish")
+                    .setCreatedOn(LocalDateTime.now())
+                    .setShorDescription("Lorem ipsum short")
+                    .setTextContent("Lorem ipsum long")
+                    .setImageURL("/static/img/recipe-pic1.jpg");
+
+            this.repository.save(recipe);
+        }
 
     }
 

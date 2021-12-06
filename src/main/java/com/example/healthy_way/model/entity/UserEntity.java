@@ -1,6 +1,7 @@
 package com.example.healthy_way.model.entity;
 
 import com.example.healthy_way.model.enums.GenderEnum;
+import com.example.healthy_way.model.enums.RoleEnum;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserEntity extends BaseEntity{
 
     private GenderEnum genderEnum;
 
-    private List<RoleEntity> roles;
+    private RoleEnum role; // TODO: make list of roles
 
     public UserEntity() {
     }
@@ -66,22 +67,21 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-    public List<RoleEntity> getRoles() {
-        return roles;
-    }
-
-    public UserEntity setRoles(List<RoleEntity> roles) {
-        this.roles = roles;
-        return this;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Enumerated(EnumType.STRING)
+    public RoleEnum getRole() {
+        return role;
+    }
+
+    public UserEntity setRole(RoleEnum role) {
+        this.role = role;
+        return this;
     }
 }

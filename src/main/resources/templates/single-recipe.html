@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{fragments/commons::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:include="~{fragments/commons::navbar}">
+
+</header>
+
+<div class="container min-vh-100 min-vw-80 justify-content-center">
+    <div class="text-center my-3">
+        <h2>Title of recipe</h2>
+    </div>
+    <div class="container-fluid">
+        <a class="btn btn-outline-info">Like</a>
+        <div class="float-end ">
+            <a class="btn btn-outline-info">Edit</a>
+            <a class="btn btn-outline-info">Delete</a>
+        </div>
+
+    </div>
+    <div class="col-12 border min-vh-80 border-dark m-auto">
+        <div class="row mt-2 ms-2">
+            <div class="col-6">
+                <img class="mh-100 mw-100"
+                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWE2cA4gMLSElnMWVnB25lMSOzGt8TeIwgiA&usqp=CAU"
+                     alt="Some pic">
+            </div>
+            <div class="col-4">
+                <article>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consequatur delectus eos est et
+                    excepturi facere, in inventore laboriosam laudantium minima
+                    molestias mollitia neque possimus quasi quisquam tempore veritatis voluptates.
+                </article>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <span> Author : Some author </span>
+        <span class="float-end">Created on : Some static content</span>
+    </div>
+</div>
+
+</body>
+</html>
