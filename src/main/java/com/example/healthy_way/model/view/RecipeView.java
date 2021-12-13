@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 public class RecipeView {
 
+    private String id;
+
     private String name;
 
     private String imageURL;
@@ -72,6 +74,15 @@ public class RecipeView {
 
     public RecipeView setAuthor(UserEntity author) {
         this.author = author;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public RecipeView setId(String id) {
+        this.id = id;
         return this;
     }
 }

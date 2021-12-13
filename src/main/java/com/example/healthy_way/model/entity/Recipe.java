@@ -3,6 +3,7 @@ package com.example.healthy_way.model.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,6 +26,7 @@ public class Recipe extends BaseEntity {
     }
 
     @Column(name = "name",nullable = false,unique = true)
+    @Size(min = 3,max = 25)
     public String getName() {
         return name;
     }
@@ -35,6 +37,7 @@ public class Recipe extends BaseEntity {
     }
 
     @Column(name = "image_url")
+    @NotNull
     public String getImageURL() {
         return imageURL;
     }
@@ -45,6 +48,7 @@ public class Recipe extends BaseEntity {
     }
 
     @Column(name = "text_content",columnDefinition = "TEXT",nullable = false)
+    @Size(min = 20,max = 1500)
     public String getTextContent() {
         return textContent;
     }

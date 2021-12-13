@@ -9,6 +9,10 @@
 
 </header>
 
+<div class="text-center my-3">
+  <a type="button" th:href="@{/recipes/add}" class="btn btn-primary btn-lg btn-block w-50">Add Recipe</a>
+</div>
+
 <div class="card-deck row">
   <div th:each="recipe : ${recipes}" class="card col-3">
     <img class="card-img-top" th:src="${recipe.getImageURL()}" alt="Card image cap">
@@ -16,9 +20,10 @@
       <h5 class="card-title" th:text="${recipe.getName()}">Card title</h5>
       <p class="card-text" th:text="${recipe.getShorDescription()}">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
       <p class="card-text"><small class="text-muted" th:text="${recipe.getCreatedOn()}">Last updated 3 mins ago</small></p>
-      <input class="btn btn-primary" type="button" value="Check it Out">
+      <a th:href="@{/recipes/single-recipe/{id}(id=${recipe.getId()})}" class="btn btn-primary" type="button">Check it out</a>
     </div>
   </div>
 </div>
+
 </body>
 </html>

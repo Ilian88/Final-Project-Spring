@@ -62,8 +62,8 @@ public class InitializerDB implements CommandLineRunner {
                     .setAuthor(user1)
                     .setName("Some fish")
                     .setCreatedOn(LocalDateTime.now())
-                    .setShorDescription("Lorem ipsum short")
-                    .setTextContent("Lorem ipsum long")
+                    .setShorDescription("Lorem ipsum short fgj gj gh jgh jg jg")
+                    .setTextContent("Lorem ipsum long f fh fhfhfhfhf hffhfghf")
                     .setImageURL("/static/img/recipe-pic1.jpg");
 
             this.repository.save(recipe);

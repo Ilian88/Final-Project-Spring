@@ -9,9 +9,9 @@
 
 </header>
 
-<div class="container min-vh-100 min-vw-80 justify-content-center">
+<div class="container min-vh-100 min-vw-80 justify-content-center" th:object="${singleRecipe}">
     <div class="text-center my-3">
-        <h2>Title of recipe</h2>
+        <h2 th:text="*{getName()}">Title of recipe</h2>
     </div>
     <div class="container-fluid">
         <a class="btn btn-outline-info">Like</a>
@@ -25,11 +25,11 @@
         <div class="row mt-2 ms-2">
             <div class="col-6">
                 <img class="mh-100 mw-100"
-                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWE2cA4gMLSElnMWVnB25lMSOzGt8TeIwgiA&usqp=CAU"
+                     th:src="*{getImageURL()}"
                      alt="Some pic">
             </div>
             <div class="col-4">
-                <article>
+                <article th:text="*{getTextContent()}">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consequatur delectus eos est et
                     excepturi facere, in inventore laboriosam laudantium minima
                     molestias mollitia neque possimus quasi quisquam tempore veritatis voluptates.
@@ -39,8 +39,8 @@
 
     </div>
     <div class="container-fluid">
-        <span> Author : Some author </span>
-        <span class="float-end">Created on : Some static content</span>
+        <span th:text="|Author : *{getAuthor().getUsername()}|"> </span>
+        <span class="float-end" th:text="|Created on : *{getCreatedOn()}|"></span>
     </div>
 </div>
 
