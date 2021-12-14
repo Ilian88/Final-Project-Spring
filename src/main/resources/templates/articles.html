@@ -8,6 +8,9 @@
 <header th:include="~{fragments/commons::navbar}">
 
 </header>
+<div class="text-center my-3">
+    <a type="button" th:href="@{/articles/add}" class="btn btn-primary btn-lg btn-block w-50">Add Article</a>
+</div>
 
 <div class="row justify-content-around mt-5">
     <div th:each="article : ${articles}" class="card text-white bg-success mb-3 col-6" style="max-width: 18rem;">

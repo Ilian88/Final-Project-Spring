@@ -16,22 +16,25 @@
             <label for="recipeName" class="mb-1" >Recipe Name</label>
             <input type="text" th:field="*{name}" th:errorclass="bg-danger" class="form-control"
                    id="recipeName" placeholder="Give your recipe a name">
-            <small  class="form-text text-muted"></small>
+            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-text text-muted error"></small>
         </div>
         <div class="form-group col-md-8 m-auto mb-3">
             <label for="recipeDescription" class="mb-1">Text Content</label>
             <input type="text" class="form-control" th:field="*{textContent}" th:errorclass="bg-danger"
                    id="recipeDescription" placeholder="Tell us the recipe">
+            <small th:if="${#fields.hasErrors('textContent')}"  th:errors="*{textContent}" class="form-text text-muted"></small>
         </div>
         <div class="form-group col-md-8 m-auto mb-3">
             <label for="imageURL" class="mb-1">Image Url</label>
             <input type="text" class="form-control" th:field="*{imageURL}" th:errorclass="bg-danger"
                    id="imageURL" placeholder="Every recipe needs a picture">
+            <small th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}" class="form-text text-muted"></small>
         </div>
         <div class="form-group col-md-8 m-auto mb-3">
             <label for="shortDescription" class="mb-1">Short description</label>
-            <input type="text" class="form-control" th:field ="*{shorDescription}" th:errorclass="bg-danger"
-                   id="shortDescription" placeholder="Give us a shprt description">
+            <input type="text" class="form-control" th:field ="*{shorDescription}"  th:errorclass="bg-danger"
+                   id="shortDescription" placeholder="Give us a short description">
+            <small th:if="${#fields.hasErrors('shorDescription')}" th:errors="*{shorDescription}" class="form-text text-muted"></small>
         </div>
         <div class="mt-4 text-center">
             <button class="btn btn-primary m-auto" type="submit">Submit</button>

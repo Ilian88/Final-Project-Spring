@@ -5,6 +5,8 @@ import javax.validation.constraints.Size;
 
 public class RecipeBindingModel {
 
+    private String id;
+
     private String name;
 
     private String imageURL;
@@ -55,6 +57,15 @@ public class RecipeBindingModel {
 
     public RecipeBindingModel setShorDescription(String shorDescription) {
         this.shorDescription = shorDescription;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public RecipeBindingModel setId(String id) {
+        this.id = id;
         return this;
     }
 }

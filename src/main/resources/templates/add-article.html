@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container mt-4">
+  <div class="text-center">
+    <h2>Add Recipe</h2>
+  </div>
+  <form th:action="@{/articles/add}" th:method="POST" th:object="${addArticleBindingModel}">
+    <div class="form-group col-md-8 m-auto mb-3 ">
+      <label for="recipeName" class="mb-1" >Article title</label>
+      <input type="text" th:field="*{getTitle()}" th:errorclass="bg-danger" class="form-control"
+             id="recipeName" placeholder="Give your recipe a name">
+      <small th:if="${#fields.hasErrors('title')}" th:errors="*{getTitle()}" class="form-text text-muted error"></small>
+    </div>
+    <div class="form-group col-md-8 m-auto mb-3">
+      <label for="recipeDescription" class="mb-1">Text Content</label>
+      <input type="text" class="form-control" th:field="*{getTextContent()}" th:errorclass="bg-danger"
+             id="recipeDescription" placeholder="Tell us the recipe">
+      <small th:if="${#fields.hasErrors('textContent')}"  th:errors="*{getTextContent()}" class="form-text text-muted"></small>
+    </div>
+    <div class="form-group col-md-8 m-auto mb-3">
+      <label for="shortDescription" class="mb-1">Short description</label>
+      <input type="text" class="form-control" th:field ="*{getShortDescription()}"  th:errorclass="bg-danger"
+             id="shortDescription" placeholder="Give us a short description">
+      <small th:if="${#fields.hasErrors('shorDescription')}" th:errors="*{getShortDescription()}" class="form-text text-muted"></small>
+    </div>
+    <div class="mt-4 text-center">
+      <button class="btn btn-primary m-auto" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

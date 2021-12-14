@@ -1,11 +1,17 @@
 package com.example.healthy_way.service.impl;
 
+import com.example.healthy_way.model.binding.AddArticleBindingModel;
+import com.example.healthy_way.model.entity.Article;
 import com.example.healthy_way.model.view.ArticleViewModel;
 import com.example.healthy_way.repository.ArticleRepository;
 import com.example.healthy_way.service.ArticleService;
+import com.example.healthy_way.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,10 +20,12 @@ public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleRepository articleRepository;
     private final ModelMapper modelMapper;
+    private final UserService userService;
 
-    public ArticleServiceImpl(ArticleRepository articleRepository, ModelMapper modelMapper) {
+    public ArticleServiceImpl(ArticleRepository articleRepository, ModelMapper modelMapper, UserService userService) {
         this.articleRepository = articleRepository;
         this.modelMapper = modelMapper;
+        this.userService = userService;
     }
 
     @Override
@@ -31,5 +39,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ArticleViewModel getArticleById(String id) {
         return modelMapper.map(this.articleRepository.getById(id),ArticleViewModel.class);
+    }
+
+    @Override
+    public void saveArticle(AddArticleBindingModel articleBindingModel) {
+        Article article = modelMapper.map(articleBindingModel,Article.class);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        article.setAuthor(this.userService.findUserByUsername(auth.getName()));
+
+        article.setCreatedOn(LocalDateTime.now());
+
+        this.articleRepository.save(article);
     }
 }

@@ -18,6 +18,11 @@ public class Like extends BaseEntity {
 
     private Long number = 0L;
 
+    private Recipe recipe;
+
+    private Article article;
+
+
     public Like() {
     }
 
@@ -48,6 +53,25 @@ public class Like extends BaseEntity {
 
     public Like setNumber(Long number) {
         this.number = number;
+        return this;
+    }
+    @ManyToOne
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public Like setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+        return this;
+    }
+
+    @ManyToOne
+    public Article getArticle() {
+        return article;
+    }
+
+    public Like setArticle(Article article) {
+        this.article = article;
         return this;
     }
 }
