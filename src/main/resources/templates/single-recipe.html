@@ -14,9 +14,9 @@
         <h2 th:text="*{getName()}">Title of recipe</h2>
     </div>
     <div class="container-fluid">
-        <a th:href="@{likes/add/rId(rId=*{getId()})}" class="btn btn-outline-info">Like</a>
+        <a th:href="@{likes/add/{rId}(rId=*{getId()})}" class="btn btn-outline-info">Like</a>
         <div class="float-end ">
-            <a class="btn btn-outline-info">Edit</a>
+            <a th:href="@{/recipes/single-recipe/{rId}(rId=${singleRecipe.getId()})/edit}" class="btn btn-outline-info">Edit</a>
             <a class="btn btn-outline-info">Delete</a>
         </div>
 

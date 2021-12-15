@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/likes")
 public class LikeController {
 
     private final LikeService likeService;
@@ -16,11 +15,11 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-    @GetMapping("/add/{rId}")
+    @GetMapping("/recipes/single-recipe/likes/add/{rId}")
     public String addLikeRecipe(@PathVariable("rId") String recipeId) {
 
-        this.likeService.addLike(recipeId);
+        this.likeService.addLikeRecipe(recipeId);
 
-        // TODO : to add the logic in service
+        return "redirect:/recipes/single-recipe";
     }
 }

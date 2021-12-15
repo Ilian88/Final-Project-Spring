@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "recipes")
@@ -17,6 +18,8 @@ public class Recipe extends BaseEntity {
     private String textContent;
 
     private String shorDescription;
+
+    private List<Like> likes;
 
     private LocalDateTime createdOn;
 
@@ -86,6 +89,16 @@ public class Recipe extends BaseEntity {
 
     public Recipe setAuthor(UserEntity author) {
         this.author = author;
+        return this;
+    }
+
+    @OneToMany(mappedBy = "recipe",fetch = FetchType.EAGER)
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public Recipe setLikes(List<Like> likes) {
+        this.likes = likes;
         return this;
     }
 }

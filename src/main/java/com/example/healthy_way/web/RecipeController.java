@@ -42,11 +42,22 @@ public class RecipeController {
     }
 
     @GetMapping("/single-recipe/{id}")
-    public String getArticle(@PathVariable("id") String id,
+    public String getRecipe(@PathVariable("id") String id,
                              Model model) {
         model.addAttribute("singleRecipe",this.recipeService.getById(id));
 
         return "single-recipe";
+    }
+
+    @GetMapping("/single-recipe/{id}/edit")
+    public String editRecipe(@PathVariable("id") String id,
+                             Model model) {
+        model.addAttribute("singleRecipe",this.recipeService.getById(id));
+
+        //TODO : fix the url in edit-recipe
+
+        return "edit-recipe";
+
     }
 
     @PostMapping("/add")
@@ -67,6 +78,8 @@ public class RecipeController {
         return "redirect:/";
 
         // Todo: to add error messages
+
+        // Todo : to disable like button;
     }
 
 }

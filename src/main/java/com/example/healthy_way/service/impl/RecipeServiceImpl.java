@@ -6,9 +6,8 @@ import com.example.healthy_way.model.view.RecipeView;
 import com.example.healthy_way.repository.RecipeRepository;
 import com.example.healthy_way.service.RecipeService;
 import com.example.healthy_way.service.UserService;
+import com.example.healthy_way.utils.AuthProvider;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -46,9 +45,13 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe recipe = modelMapper.map(recipeBindingModel, Recipe.class);
         recipe.setCreatedOn(LocalDateTime.now());
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        recipe.setAuthor(this.userService.findUserByUsername(auth.getName()));
+        recipe.setAuthor(this.userService.findUserByUsername(AuthProvider.getAuth().getName()));
 
         this.recipeRepository.save(recipe);
+    }
+
+    @Override
+    public Recipe findById(String recipeId) {
+        return this.recipeRepository.findById(recipeId).orElseThrow();
     }
 }

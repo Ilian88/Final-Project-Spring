@@ -1,6 +1,7 @@
 package com.example.healthy_way.service;
 
 import com.example.healthy_way.model.binding.RecipeBindingModel;
+import com.example.healthy_way.model.entity.Recipe;
 import com.example.healthy_way.model.view.RecipeView;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface RecipeService {
     RecipeView getById(String id);
 
     void addRecipe(RecipeBindingModel recipeBindingModel);
+
+    Recipe findById(String recipeId);
 }
