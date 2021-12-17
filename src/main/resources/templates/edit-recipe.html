@@ -9,9 +9,9 @@
 </header>
 <div class="container mt-4">
     <div class="text-center">
-        <h2>Add Recipe</h2>
+        <h2>Edit Recipe</h2>
     </div>
-    <form th:action="@{/recipes/single-recipe/{rId}(rId=${singleRecipe.getId()})}" th:method="POST" th:object="${singleRecipe}">
+    <form th:action="@{/recipes/single-recipe/{rId}/edit(rId=${singleRecipe.getId()})}" th:method="POST" th:object="${singleRecipe}">
         <div class="form-group col-md-8 m-auto mb-3 ">
             <label for="recipeName" class="mb-1" >Recipe Name</label>
             <input type="text" th:field="*{name}" th:errorclass="bg-danger" class="form-control"

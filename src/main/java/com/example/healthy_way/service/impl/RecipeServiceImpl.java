@@ -54,4 +54,27 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe findById(String recipeId) {
         return this.recipeRepository.findById(recipeId).orElseThrow();
     }
+
+    @Override
+    public void updateRecipe(RecipeBindingModel recipeBindingModel) {
+        Recipe recipe = this.recipeRepository.findById(recipeBindingModel.getId()).orElseThrow();
+
+        updateRecipeValues(recipe,recipeBindingModel);
+
+        this.recipeRepository.save(recipe);
+
+        //TODO : to check
+    }
+
+    @Override
+    public void delete(String id) {
+        this.recipeRepository.delete(this.recipeRepository.getById(id));
+    }
+
+    private void updateRecipeValues(Recipe recipe, RecipeBindingModel recipeBindingModel) {
+        recipe.setName(recipeBindingModel.getName())
+                .setShorDescription(recipeBindingModel.getShorDescription())
+                .setTextContent(recipeBindingModel.getTextContent())
+                .setImageURL(recipeBindingModel.getImageURL());
+    }
 }

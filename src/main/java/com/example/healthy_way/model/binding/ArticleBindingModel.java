@@ -2,7 +2,7 @@ package com.example.healthy_way.model.binding;
 
 import javax.validation.constraints.Size;
 
-public class AddArticleBindingModel {
+public class ArticleBindingModel {
 
     private String id;
 
@@ -12,7 +12,7 @@ public class AddArticleBindingModel {
 
     private String shortDescription;
 
-    public AddArticleBindingModel() {
+    public ArticleBindingModel() {
     }
 
     @Size(min = 3,max= 20, message = "Title must be at least 3 characters!")
@@ -20,7 +20,7 @@ public class AddArticleBindingModel {
         return title;
     }
 
-    public AddArticleBindingModel setTitle(String title) {
+    public ArticleBindingModel setTitle(String title) {
         this.title = title;
         return this;
     }
@@ -30,7 +30,7 @@ public class AddArticleBindingModel {
         return textContent;
     }
 
-    public AddArticleBindingModel setTextContent(String textContent) {
+    public ArticleBindingModel setTextContent(String textContent) {
         this.textContent = textContent;
         return this;
     }
@@ -40,7 +40,7 @@ public class AddArticleBindingModel {
         return shortDescription;
     }
 
-    public AddArticleBindingModel setShortDescription(String shortDescription) {
+    public ArticleBindingModel setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
         return this;
     }
@@ -50,7 +50,7 @@ public class AddArticleBindingModel {
         return id;
     }
 
-    public AddArticleBindingModel setId(String id) {
+    public ArticleBindingModel setId(String id) {
         this.id = id;
         return this;
     }

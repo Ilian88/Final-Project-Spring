@@ -1,6 +1,6 @@
 package com.example.healthy_way.service;
 
-import com.example.healthy_way.model.binding.AddArticleBindingModel;
+import com.example.healthy_way.model.binding.ArticleBindingModel;
 import com.example.healthy_way.model.view.ArticleViewModel;
 
 import java.util.List;
@@ -11,5 +11,7 @@ public interface ArticleService {
 
     ArticleViewModel getArticleById(String id);
 
-    void saveArticle(AddArticleBindingModel articleBindingModel);
+    void saveArticle(ArticleBindingModel articleBindingModel);
+
+    void editArticle(String articleId, ArticleBindingModel articleBindingModel);
 }

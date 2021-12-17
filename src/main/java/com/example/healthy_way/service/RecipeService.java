@@ -14,4 +14,8 @@ public interface RecipeService {
     void addRecipe(RecipeBindingModel recipeBindingModel);
 
     Recipe findById(String recipeId);
+
+    void updateRecipe(RecipeBindingModel recipeBindingModel);
+
+    void delete(String id);
 }

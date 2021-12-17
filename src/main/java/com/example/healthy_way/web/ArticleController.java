@@ -1,9 +1,7 @@
 package com.example.healthy_way.web;
 
-import com.example.healthy_way.model.binding.AddArticleBindingModel;
+import com.example.healthy_way.model.binding.ArticleBindingModel;
 import com.example.healthy_way.service.ArticleService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,8 +21,8 @@ public class ArticleController {
     }
 
     @ModelAttribute
-    public AddArticleBindingModel addArticleBindingModel() {
-        return new AddArticleBindingModel();
+    public ArticleBindingModel addArticleBindingModel() {
+        return new ArticleBindingModel();
     }
 
     @GetMapping("/all")
@@ -46,12 +44,30 @@ public class ArticleController {
     @GetMapping("/add")
     public String addArticle() {
 
-        //TODO : to fix it
         return "add-article";
     }
 
+    @GetMapping("/edit/{aId}")
+    public String editArticle(@PathVariable("aId") String articleId,
+                              ArticleBindingModel articleBindingModel,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("articleBindingModel",articleBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",
+                    bindingResult);
+
+            return "redirect:edit/{aId}";
+        }
+
+        this.articleService.editArticle(articleId,articleBindingModel);
+
+        return "redirect:/";
+    }
+
     @PostMapping("/add")
-    public String addArticleConfirm(@ModelAttribute @Valid AddArticleBindingModel articleBindingModel,
+    public String addArticleConfirm(@ModelAttribute @Valid ArticleBindingModel articleBindingModel,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) {
 
@@ -67,5 +83,7 @@ public class ArticleController {
 
         return "redirect:/";
     }
+
+
 
 }

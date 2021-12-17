@@ -76,7 +76,7 @@ public class UserController {
         //TODO: enter the errors in the HTML and gender enum field to be <select>
     }
 
-    @GetMapping("login-error")
+    @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("error", true);
 

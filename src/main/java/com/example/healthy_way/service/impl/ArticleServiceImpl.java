@@ -1,6 +1,6 @@
 package com.example.healthy_way.service.impl;
 
-import com.example.healthy_way.model.binding.AddArticleBindingModel;
+import com.example.healthy_way.model.binding.ArticleBindingModel;
 import com.example.healthy_way.model.entity.Article;
 import com.example.healthy_way.model.view.ArticleViewModel;
 import com.example.healthy_way.repository.ArticleRepository;
@@ -42,7 +42,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void saveArticle(AddArticleBindingModel articleBindingModel) {
+    public void saveArticle(ArticleBindingModel articleBindingModel) {
         Article article = modelMapper.map(articleBindingModel,Article.class);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -51,5 +51,22 @@ public class ArticleServiceImpl implements ArticleService {
         article.setCreatedOn(LocalDateTime.now());
 
         this.articleRepository.save(article);
+    }
+
+    @Override
+    public void editArticle(String articleId, ArticleBindingModel articleBindingModel) {
+
+        Article article = this.articleRepository.findById(articleId).orElseThrow();
+
+        updateArticleValues(article,articleBindingModel);
+
+        this.articleRepository.save(article);
+        //TODO : check
+    }
+
+    private void updateArticleValues(Article article, ArticleBindingModel articleBindingModel) {
+        article.setTitle(articleBindingModel.getTitle())
+                .setShortDescription(articleBindingModel.getShortDescription())
+                .setTextContent(articleBindingModel.getTextContent());
     }
 }

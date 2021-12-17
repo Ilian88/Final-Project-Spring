@@ -54,9 +54,27 @@ public class RecipeController {
                              Model model) {
         model.addAttribute("singleRecipe",this.recipeService.getById(id));
 
-        //TODO : fix the url in edit-recipe
 
         return "edit-recipe";
+
+    }
+
+    @PostMapping("/single-recipe/{id}/edit")
+    public String editRecipeConfirm(@ModelAttribute @Valid RecipeBindingModel recipeBindingModel,
+                                    BindingResult bindingResult,
+                                    RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("recipeBindingModel",recipeBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",
+                    bindingResult);
+
+            return "redirect:single-recipe/{id}/edit";
+        }
+
+        this.recipeService.updateRecipe(recipeBindingModel);
+
+        return "redirect:/";
 
     }
 
@@ -80,6 +98,14 @@ public class RecipeController {
         // Todo: to add error messages
 
         // Todo : to disable like button;
+    }
+
+    @DeleteMapping("/single-recipe/{id}/delete")
+    public String delete(@PathVariable("id") String id) {
+
+        this.recipeService.delete(id);
+
+        return "redirect:/";
     }
 
 }
