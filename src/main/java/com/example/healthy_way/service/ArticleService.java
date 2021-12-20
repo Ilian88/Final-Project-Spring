@@ -14,4 +14,6 @@ public interface ArticleService {
     void saveArticle(ArticleBindingModel articleBindingModel);
 
     void editArticle(String articleId, ArticleBindingModel articleBindingModel);
+
+    void deleteArticle(String articleId);
 }

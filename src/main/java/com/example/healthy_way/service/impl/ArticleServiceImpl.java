@@ -1,5 +1,6 @@
 package com.example.healthy_way.service.impl;
 
+import com.example.healthy_way.exception.DatabaseNotFoundException;
 import com.example.healthy_way.model.binding.ArticleBindingModel;
 import com.example.healthy_way.model.entity.Article;
 import com.example.healthy_way.model.view.ArticleViewModel;
@@ -50,7 +51,12 @@ public class ArticleServiceImpl implements ArticleService {
 
         article.setCreatedOn(LocalDateTime.now());
 
-        this.articleRepository.save(article);
+        try {
+            this.articleRepository.save(article);
+        } catch (Exception ex) {
+            throw new DatabaseNotFoundException(ex.getMessage(),ex.getCause());
+        }
+
     }
 
     @Override
@@ -60,8 +66,19 @@ public class ArticleServiceImpl implements ArticleService {
 
         updateArticleValues(article,articleBindingModel);
 
-        this.articleRepository.save(article);
-        //TODO : check
+        try {
+            this.articleRepository.save(article);
+        }catch (Exception ex) {
+            throw new DatabaseNotFoundException(ex.getMessage(),ex.getCause());
+        }
+
+    }
+
+    @Override
+    public void deleteArticle(String articleId) {
+        Article article = this.articleRepository.getById(articleId);
+
+        this.articleRepository.delete(article);
     }
 
     private void updateArticleValues(Article article, ArticleBindingModel articleBindingModel) {

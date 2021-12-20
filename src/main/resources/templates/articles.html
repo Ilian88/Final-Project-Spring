@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<style>
+    body {
+        background-image: url("https://fatstacksblog.com/wp-content/uploads/2019/11/Person-writing-article-nov26.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+</style>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/commons::head}">
 
@@ -12,15 +20,18 @@
     <a type="button" th:href="@{/articles/add}" class="btn btn-primary btn-lg btn-block w-50">Add Article</a>
 </div>
 
-<div class="row justify-content-around mt-5">
+<div class="row justify-content-around mt-5" style="opacity: 0.8">
     <div th:each="article : ${articles}" class="card text-white bg-success mb-3 col-6" style="max-width: 18rem;">
         <div class="card-header" th:text="${article.getAuthor().getUsername()}">Header</div>
         <div class="card-body">
             <h5 class="card-title" th:text="|Author : ${article.getTitle()}|">Success card title</h5>
-            <p class="card-text" th:text="${article.getShortDescription()}">Some quick example text to build on the card title and make up the bulk of the card's
+            <p class="card-text" th:text="${article.getShortDescription()}">Some quick example text to build on the card
+                title and make up the bulk of the card's
                 content.</p>
-            <a class="btn btn-primary" th:href="@{/articles/get/{id}(id = ${article.getId()})}" type="button">Learn More</a>
+            <a class="btn btn-primary" th:href="@{/articles/get/{id}(id = ${article.getId()})}" type="button">Learn
+                More</a>
         </div>
     </div>
+</div>
 </body>
 </html>

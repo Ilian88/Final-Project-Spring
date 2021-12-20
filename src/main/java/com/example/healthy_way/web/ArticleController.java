@@ -48,17 +48,26 @@ public class ArticleController {
     }
 
     @GetMapping("/edit/{aId}")
-    public String editArticle(@PathVariable("aId") String articleId,
-                              ArticleBindingModel articleBindingModel,
+    public String editArticle(@PathVariable("aId") String id,
+                              Model model){
+
+        model.addAttribute("_article",this.articleService.getArticleById(id));
+
+        return "edit-article";
+    }
+
+    @PostMapping("/edit/{aId}")
+    public String editArticleConfirm(@PathVariable("aId") String articleId,
+                             @Valid ArticleBindingModel articleBindingModel,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("articleBindingModel",articleBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.articleBindingModel",
                     bindingResult);
 
-            return "redirect:edit/{aId}";
+            return "redirect:" + articleId;
         }
 
         this.articleService.editArticle(articleId,articleBindingModel);
@@ -73,13 +82,20 @@ public class ArticleController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("articleBindingModel",articleBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.articleBindingModel",
                     bindingResult);
 
             return "redirect:add";
         }
 
         this.articleService.saveArticle(articleBindingModel);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete/{aId}")
+    public String delete(@PathVariable("aId") String articleId) {
+        this.articleService.deleteArticle(articleId);
 
         return "redirect:/";
     }

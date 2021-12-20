@@ -42,11 +42,9 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(Model model, @RequestParam(required = false) boolean error) {
-        if (!model.containsAttribute("error")) {
-            model.addAttribute("error", false);
+        if (!error) {
+            model.addAttribute("error", true);
         }
-
-        model.addAttribute("error", error);
         return "login";
     }
 

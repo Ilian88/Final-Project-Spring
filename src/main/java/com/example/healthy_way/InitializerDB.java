@@ -64,7 +64,7 @@ public class InitializerDB implements CommandLineRunner {
                     .setCreatedOn(LocalDateTime.now())
                     .setShorDescription("Lorem ipsum short fgj gj gh jgh jg jg")
                     .setTextContent("Lorem ipsum long f fh fhfhfhfhf hffhfghf")
-                    .setImageURL("/static/img/recipe-pic1.jpg");
+                    .setImageURL("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1_Y9N1HSORDn0kxmeAZdebNGGYFWOQG58JA&usqp=CAU");
 
             this.repository.save(recipe);
         }

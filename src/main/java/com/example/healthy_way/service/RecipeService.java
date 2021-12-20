@@ -15,7 +15,7 @@ public interface RecipeService {
 
     Recipe findById(String recipeId);
 
-    void updateRecipe(RecipeBindingModel recipeBindingModel);
+    void updateRecipe(RecipeBindingModel recipeBindingModel,String recipeId);
 
     void delete(String id);
 }

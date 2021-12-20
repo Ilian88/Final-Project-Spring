@@ -11,8 +11,8 @@
     <h4 style="width: fit-content" class="mx-auto my-3">NAME OF ARTICLE</h4>
 
         <div class="float-end ">
-            <a th:href="@{/recipes/single-recipe/{rId}/edit(rId=*{getId()})}" class="btn btn-outline-info">Edit</a>
-            <a  th:href="@{/recipes/single-recipe/{rId}/delete(rId=*{getId()})}" class="btn btn-outline-info">Delete</a>
+            <a th:href="@{/articles/edit/{aId}(aId=*{getId()})}" class="btn btn-outline-info">Edit</a>
+            <a  th:href="@{/articles/delete/{aId}(aId=*{getId()})}" class="btn btn-outline-info">Delete</a>
         </div>
 
     <article class="justify-content-center border border-dark rounded mt-3 overflow-auto p-3"

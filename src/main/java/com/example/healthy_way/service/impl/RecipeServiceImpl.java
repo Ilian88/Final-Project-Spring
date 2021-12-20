@@ -1,5 +1,6 @@
 package com.example.healthy_way.service.impl;
 
+import com.example.healthy_way.exception.DatabaseNotFoundException;
 import com.example.healthy_way.model.binding.RecipeBindingModel;
 import com.example.healthy_way.model.entity.Recipe;
 import com.example.healthy_way.model.view.RecipeView;
@@ -47,7 +48,12 @@ public class RecipeServiceImpl implements RecipeService {
 
         recipe.setAuthor(this.userService.findUserByUsername(AuthProvider.getAuth().getName()));
 
-        this.recipeRepository.save(recipe);
+        try {
+            this.recipeRepository.save(recipe);
+        } catch (Exception ex) {
+            throw new DatabaseNotFoundException(ex.getMessage(),ex.getCause());
+        }
+
     }
 
     @Override
@@ -56,14 +62,13 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void updateRecipe(RecipeBindingModel recipeBindingModel) {
-        Recipe recipe = this.recipeRepository.findById(recipeBindingModel.getId()).orElseThrow();
+    public void updateRecipe(RecipeBindingModel recipeBindingModel,String recipeId) {
+        Recipe recipe = this.recipeRepository.findById(recipeId).orElseThrow();
 
         updateRecipeValues(recipe,recipeBindingModel);
 
         this.recipeRepository.save(recipe);
 
-        //TODO : to check
     }
 
     @Override

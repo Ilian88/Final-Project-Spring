@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+
+<style>
+    .container-fluid {
+        background-image: url("https://media.istockphoto.com/photos/paper-notebook-and-food-ingredients-picture-id537422822?k=20&m=537422822&s=612x612&w=0&h=F5_-peT-pfN-XTa594zwam8wUak8nc69JEk0Uk-zpiM=");
+        background-repeat: no-repeat;
+        backdrop-filter: opacity(70%);
+        background-size: cover;
+    }
+</style>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head}">
 </head>
@@ -7,11 +16,12 @@
 <header th:replace="~{fragments/commons::navbar}">
 
 </header>
-<div class="container mt-4">
+<div class="container-fluid w-100 pt-4 text-primary">
     <div class="text-center">
-        <h2>Add Recipe</h2>
+        <h2 class="text-light">Add Recipe</h2>
     </div>
-    <form th:action="@{/recipes/add}" th:method="POST" th:object="${recipeBindingModel}">
+    <form th:action="@{/recipes/add}" th:method="POST" th:object="${recipeBindingModel}" id="addRecipe"
+    class="font-weight-bold">
         <div class="form-group col-md-8 m-auto mb-3 ">
             <label for="recipeName" class="mb-1" >Recipe Name</label>
             <input type="text" th:field="*{name}" th:errorclass="bg-danger" class="form-control"
@@ -20,8 +30,8 @@
         </div>
         <div class="form-group col-md-8 m-auto mb-3">
             <label for="recipeDescription" class="mb-1">Text Content</label>
-            <input type="text" class="form-control" th:field="*{textContent}" th:errorclass="bg-danger"
-                   id="recipeDescription" placeholder="Tell us the recipe">
+            <textarea form="addRecipe" class="form-control" th:field="*{textContent}" th:errorclass="bg-danger"
+                      id="recipeDescription" placeholder="Tell us the recipe"></textarea>
             <small th:if="${#fields.hasErrors('textContent')}"  th:errors="*{textContent}" class="form-text text-muted"></small>
         </div>
         <div class="form-group col-md-8 m-auto mb-3">

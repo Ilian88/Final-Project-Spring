@@ -12,23 +12,23 @@
   <div class="text-center">
     <h2>Edit Article</h2>
   </div>
-  <form th:action="@{/articles/edit/{aId}" th:method="POST" th:object="${addArticleBindingModel}">
+  <form th:action="@{/articles/edit/{aId}(aId=*{getId()})}" th:method="POST" th:object="${_article}" id="editForm">
     <div class="form-group col-md-8 m-auto mb-3 ">
       <label for="recipeName" class="mb-1" >Recipe title</label>
       <input type="text" th:field="*{title}" th:errorclass="bg-danger" class="form-control"
-             id="recipeName" placeholder="Give your article a name">
+             id="recipeName" placeholder="Give your article a name"/>
       <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="form-text text-muted error"></small>
     </div>
     <div class="form-group col-md-8 m-auto mb-3">
       <label for="recipeDescription" class="mb-1">Text Content</label>
-      <input type="text" class="form-control" th:field="*{textContent}" th:errorclass="bg-danger"
-             id="recipeDescription" placeholder="Put in the content">
+      <textarea form="editForm" class="form-control" th:field="*{textContent}" th:errorclass="bg-danger"
+                id="recipeDescription" placeholder="Put in the content"></textarea>
       <small th:if="${#fields.hasErrors('textContent')}"  th:errors="*{textContent}" class="form-text text-muted"></small>
     </div>
     <div class="form-group col-md-8 m-auto mb-3">
       <label for="shortDescription" class="mb-1">Short description</label>
-      <input type="text" class="form-control" th:field ="*{shortDescription}"  th:errorclass="bg-danger"
-             id="shortDescription" placeholder="Give us a short description">
+      <input type="text" class="form-control" th:field ="*{shortDescription}" th:errorclass="bg-danger"
+             id="shortDescription" placeholder="Give us a short description"/>
       <small th:if="${#fields.hasErrors('shortDescription')}" th:errors="*{shortDescription}" class="form-text text-muted"></small>
     </div>
     <div class="mt-4 text-center">

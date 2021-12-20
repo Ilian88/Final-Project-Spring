@@ -16,8 +16,8 @@
     <div class="container-fluid">
         <a th:href="@{likes/add/{rId}(rId=*{getId()})}" class="btn btn-outline-info">Like</a>
         <div class="float-end ">
-            <a th:href="@{/recipes/single-recipe/{rId}/edit(rId=${singleRecipe.getId()})}" class="btn btn-outline-info">Edit</a>
-            <a  th:href="@{/recipes/single-recipe/{rId}/delete(rId=${singleRecipe.getId()})}" class="btn btn-outline-info">Delete</a>
+            <a th:href="@{/recipes/edit/{rId}(rId=${singleRecipe.getId()})}" class="btn btn-outline-info">Edit</a>
+            <a  th:href="@{/recipes/delete/{rid}(rId=${singleRecipe.getId()})}" class="btn btn-outline-info">Delete</a>
         </div>
 
     </div>

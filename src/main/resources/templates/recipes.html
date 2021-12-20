@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<style>
+    body {
+        background-image: url("https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2020/11/Oatmeal-Recipe-5.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+</style>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/commons::head}">
 
@@ -8,22 +16,26 @@
 <header th:include="~{fragments/commons::navbar}">
 
 </header>
-
-<div class="text-center my-3">
-  <a type="button" th:href="@{/recipes/add}" class="btn btn-primary btn-lg btn-block w-50">Add Recipe</a>
-</div>
-
-<div class="card-deck row">
-  <div th:each="recipe : ${recipes}" class="card col-3">
-    <img class="card-img-top" th:src="${recipe.getImageURL()}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title" th:text="${recipe.getName()}">Card title</h5>
-      <p class="card-text" th:text="${recipe.getShorDescription()}">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted" th:text="${recipe.getCreatedOn()}">Last updated 3 mins ago</small></p>
-      <a th:href="@{/recipes/single-recipe/{id}(id=${recipe.getId()})}" class="btn btn-primary" type="button">Check it out</a>
+<div class="container-fluid">
+    <div class="text-center py-3">
+        <a type="button" th:href="@{/recipes/add}" class="btn btn-primary btn-lg btn-block w-50">Add Recipe</a>
     </div>
-  </div>
-</div>
 
+    <div class="card-deck row">
+        <div th:each="recipe : ${recipes}" class="card col-3" style="opacity: 0.8">
+            <img class="card-img-top" th:src="@{${recipe.getImageURL()}}" width="280" height="280"
+                 alt="Card image cap" style="opacity: 1"/>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${recipe.getName()}">Card title</h5>
+                <p class="card-text" th:text="${recipe.getShorDescription()}">This is a longer card with supporting text
+                    below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted" th:text="${recipe.getCreatedOn()}">Last updated 3 mins
+                    ago</small></p>
+                <a th:href="@{/recipes/single-recipe/{id}(id=${recipe.getId()})}" class="btn btn-primary" type="button">Check
+                    it out</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

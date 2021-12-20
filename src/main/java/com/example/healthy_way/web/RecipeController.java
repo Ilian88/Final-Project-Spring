@@ -49,30 +49,30 @@ public class RecipeController {
         return "single-recipe";
     }
 
-    @GetMapping("/single-recipe/{id}/edit")
+    @GetMapping("/edit/{id}")
     public String editRecipe(@PathVariable("id") String id,
                              Model model) {
         model.addAttribute("singleRecipe",this.recipeService.getById(id));
-
 
         return "edit-recipe";
 
     }
 
-    @PostMapping("/single-recipe/{id}/edit")
-    public String editRecipeConfirm(@ModelAttribute @Valid RecipeBindingModel recipeBindingModel,
+    @PostMapping("/edit/{rId}")
+    public String editRecipeConfirm(@PathVariable("rId") String recipeId,
+                                    @ModelAttribute @Valid RecipeBindingModel recipeBindingModel,
                                     BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("recipeBindingModel",recipeBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel",
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.recipeBindingModel",
                     bindingResult);
 
-            return "redirect:single-recipe/{id}/edit";
+            return "redirect:" + recipeId;
         }
 
-        this.recipeService.updateRecipe(recipeBindingModel);
+        this.recipeService.updateRecipe(recipeBindingModel,recipeId);
 
         return "redirect:/";
 
@@ -95,12 +95,10 @@ public class RecipeController {
 
         return "redirect:/";
 
-        // Todo: to add error messages
-
         // Todo : to disable like button;
     }
 
-    @DeleteMapping("/single-recipe/{id}/delete")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id) {
 
         this.recipeService.delete(id);

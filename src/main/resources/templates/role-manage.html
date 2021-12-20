@@ -15,7 +15,7 @@
                 </div>
                 <div class="row mt-4 tm-edit-product-row">
                     <div class="col-xl-7 col-lg-7 col-md-12">
-                        <form action="/roles/add" method="POST" th:object="${addRoleBindingModel}"
+                        <form th:action="@{/roles/add}" th:method="POST" th:object="${addRoleBindingModel}"
                               class="tm-edit-product-form">
                             <div class="input-group mb-3">
                                 <label for="username"
