@@ -71,7 +71,6 @@ public class UserController {
 
         return REDIRECT_LOGIN;
 
-        //TODO: enter the errors in the HTML and gender enum field to be <select>
     }
 
     @GetMapping("/login-error")

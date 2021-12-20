@@ -49,4 +49,13 @@ public class CustomErrorController implements ErrorController {
         return "error";
     }
 
+    @ExceptionHandler({Exception.class})
+    public String allOthers(Model model, Exception ex) {
+
+        errorMessage = ex.getMessage();
+        model.addAttribute("message",errorMessage);
+
+        return "error";
+    }
+
 }

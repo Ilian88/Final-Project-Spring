@@ -98,7 +98,7 @@ public class RecipeController {
         // Todo : to disable like button;
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id) {
 
         this.recipeService.delete(id);

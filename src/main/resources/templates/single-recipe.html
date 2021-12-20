@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<style>
+    body {
+        background-image: url("https://media.istockphoto.com/photos/empty-pages-on-recipe-book-on-the-table-picture-id135102452");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+</style>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/commons::head}">
     <meta charset="UTF-8">
@@ -9,15 +17,18 @@
 
 </header>
 
-<div class="container min-vh-100 min-vw-80 justify-content-center" th:object="${singleRecipe}">
-    <div class="text-center my-3">
+<div class="container min-vh-100 text-primary min-vw-70 justify-content-center" th:object="${singleRecipe}">
+    <div class="text-center py-3">
         <h2 th:text="*{getName()}">Title of recipe</h2>
     </div>
+    <div class="col-9 m-auto">
     <div class="container-fluid">
-        <a th:href="@{likes/add/{rId}(rId=*{getId()})}" class="btn btn-outline-info">Like</a>
+        <a th:href="@{/recipes/likes/add/{rId}(rId=*{getId()})}" class="btn btn-outline-info">Like</a>
         <div class="float-end ">
             <a th:href="@{/recipes/edit/{rId}(rId=${singleRecipe.getId()})}" class="btn btn-outline-info">Edit</a>
-            <a  th:href="@{/recipes/delete/{rid}(rId=${singleRecipe.getId()})}" class="btn btn-outline-info">Delete</a>
+            <a th:href="@{/recipes/delete/{rId}(rId=${singleRecipe.getId()})}"
+               onclick="return confirm('Are yuo sure you want to delete this item')"
+               class="btn btn-outline-info">Delete</a>
         </div>
 
     </div>
@@ -29,7 +40,7 @@
                      alt="Some pic">
             </div>
             <div class="col-4">
-                <article th:text="*{getTextContent()}">
+                <article class="text-success" th:text="*{getTextContent()}">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consequatur delectus eos est et
                     excepturi facere, in inventore laboriosam laudantium minima
                     molestias mollitia neque possimus quasi quisquam tempore veritatis voluptates.
@@ -41,6 +52,7 @@
     <div class="container-fluid">
         <span th:text="|Author : *{getAuthor().getUsername()}|"> </span>
         <span class="float-end" th:text="|Created on : *{getCreatedOn()}|"></span>
+    </div>
     </div>
 </div>
 

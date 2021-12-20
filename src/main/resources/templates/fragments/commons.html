@@ -22,17 +22,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div  class="dropdown">
+        <div  class="dropdown" sec:authorize="hasAuthority('ADMIN')">
             <button  class="btn btn-secondary dropdown-toggle bg-success" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Manage Roles
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <div  class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <a th:href="@{/roles/add}" class="dropdown-item" type="button">Add/Change roles</a>
                 <a href="#" class="dropdown-item" type="button">Another action</a>
             </div>
         </div>
 
-        <div class="dropdown">
+        <div class="dropdown" sec:authorize="isAuthenticated()">
             <button class="btn btn-secondary dropdown-toggle bg-success" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 What are you interested in
             </button>

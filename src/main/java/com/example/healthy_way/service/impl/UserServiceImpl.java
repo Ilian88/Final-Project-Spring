@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
             this.userRepository.save(user);
         }
 
-        //TODO : throw custom exception
     }
 
     @Override

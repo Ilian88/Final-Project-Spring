@@ -7,18 +7,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final DataSource dataSource;
     private final PasswordEncoder passwordEncoder;
     private final LoginUserDetails loginUserDetails;
 
-    public SecurityConfig(DataSource dataSource, PasswordEncoder passwordEncoder, LoginUserDetails loginUserDetails) {
-        this.dataSource = dataSource;
+    public SecurityConfig(PasswordEncoder passwordEncoder, LoginUserDetails loginUserDetails) {
         this.passwordEncoder = passwordEncoder;
         this.loginUserDetails = loginUserDetails;
     }
@@ -35,15 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors().disable()
                 .authorizeRequests()
-                .antMatchers( "/css/**", "/js/**", "/img/**").permitAll()
                 .antMatchers("/","/users/login","/users/register","/error").permitAll()
+                .antMatchers( "/css/**", "/js/**", "/img/**").permitAll()
+                .antMatchers("/roles/**").hasAuthority("ADMIN")
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/users/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .successForwardUrl("/")
+                .defaultSuccessUrl("/")
                 .failureUrl("/users/login?error=true")
                 .and()
                 .logout()

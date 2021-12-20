@@ -15,11 +15,11 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-    @GetMapping("/recipes/single-recipe/likes/add/{rId}")
+    @GetMapping("/recipes/likes/add/{rId}")
     public String addLikeRecipe(@PathVariable("rId") String recipeId) {
 
         this.likeService.addLikeRecipe(recipeId);
 
-        return "redirect:/recipes/single-recipe";
+        return "redirect:" + recipeId;
     }
 }

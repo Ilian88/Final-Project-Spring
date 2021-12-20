@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<style>
+    body {
+        background-image: url("https://images.ctfassets.net/3s5io6mnxfqz/1hd0WN4tmN0h3yR6BeynlG/a4f9692b8ba5f8a83dca203621c92b99/AdobeStock_285954935.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+</style>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head}">
 </head>
@@ -9,30 +17,30 @@
 </header>
 <div class="container mt-4">
     <div class="text-center">
-        <h2>Edit Recipe</h2>
+        <h2 class="text-light">Edit Recipe</h2>
     </div>
     <form th:action="@{/recipes/edit/{rId}(rId=${singleRecipe.getId()})}"
           th:method="POST" th:object="${singleRecipe}" id="editRecipe">
         <div class="form-group col-md-8 m-auto mb-3 ">
-            <label for="recipeName" class="mb-1" >Recipe Name</label>
+            <label for="recipeName" class="mb-1 text-light" >Recipe Name</label>
             <input type="text" th:field="*{name}" th:errorclass="bg-danger" class="form-control"
                    id="recipeName" placeholder="Give your recipe a name">
-            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-text text-muted error"></small>
+            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-text text-light text-muted error"></small>
         </div>
         <div class="form-group col-md-8 m-auto mb-3">
-            <label for="textContent" class="mb-1">Text Content</label>
+            <label for="textContent"  class="mb-1 text-light">Text Content</label>
             <textarea form="editRecipe" class="form-control" th:field="*{textContent}" th:errorclass="bg-danger"
                       id="textContent" placeholder="Tell us the recipe"></textarea>
             <small th:if="${#fields.hasErrors('textContent')}"  th:errors="*{textContent}" class="form-text text-muted"></small>
         </div>
         <div class="form-group col-md-8 m-auto mb-3">
-            <label for="imageURL" class="mb-1">Image Url</label>
+            <label for="imageURL" class="mb-1 text-light">Image Url</label>
             <input type="text" class="form-control" th:field="*{imageURL}" th:errorclass="bg-danger"
                    id="imageURL" placeholder="Every recipe needs a picture">
-            <small th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}" class="form-text text-muted"></small>
+            <small th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}" class="form-text text-light text-muted"></small>
         </div>
         <div class="form-group col-md-8 m-auto mb-3">
-            <label for="shortDescription" class="mb-1">Short description</label>
+            <label for="shortDescription" class="mb-1 text-light">Short description</label>
             <input type="text" class="form-control" th:field ="*{shorDescription}"  th:errorclass="bg-danger"
                    id="shortDescription" placeholder="Give us a short description">
             <small th:if="${#fields.hasErrors('shorDescription')}" th:errors="*{shorDescription}" class="form-text text-muted"></small>

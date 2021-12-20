@@ -24,17 +24,18 @@
                                         name="username" th:field="*{username}">
                                     <option value="" selected>Select user</option>
                                     <option th:each="u : ${usernames}" th:text="${u}" th:value="${u}">Pesho</option>
-
                                 </select>
+                                <small class="text-danger" th:if="${userNotSelected}">Select user!</small>
                             </div>
+
                             <div class="input-group mb-3">
                                 <label class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Users</label>
                                 <div>
-                                    <input checked type="radio" id="user" name="role" value="user" th:field="*{role}">
+                                    <input checked type="radio" id="user" name="role" value="USER" th:field="*{role}">
                                     <label for="user">User</label><br/>
-                                    <input type="radio" id="moderator" name="role" value="moderator">
+                                    <input type="radio" id="moderator" name="role" value="MODERATOR">
                                     <label for="admin">Moderator</label><br/>
-                                    <input type="radio" id="admin" name="role" value="admin">
+                                    <input type="radio" id="admin" name="role" value="ADMIN">
                                     <label for="admin">Admin</label><br/>
                                 </div>
                             </div>

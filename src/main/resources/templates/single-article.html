@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<style>
+    body {
+        background-image: url("https://images.squarespace-cdn.com/content/v1/5967f14eb11be19a5cc6fdd8/1510460968201-7WDHSX694WK4M65SANJ3/image-asset.jpeg?format=1000w");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+</style>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="~{fragments/commons::head}">
 
@@ -7,26 +15,31 @@
 <header th:replace="~{fragments/commons::navbar}">
 
 </header>
-<div class="container" style="height: 70vh;width: 65%" th:object="${_article}">
-    <h4 style="width: fit-content" class="mx-auto my-3">NAME OF ARTICLE</h4>
+<div class="container fw-bold" style="height: 70vh;width: 65%" th:object="${_article}">
+    <h4 style="width: fit-content" class="mx-auto mt-3 text-light" th:text="*{title}"></h4>
 
-        <div class="float-end ">
-            <a th:href="@{/articles/edit/{aId}(aId=*{getId()})}" class="btn btn-outline-info">Edit</a>
-            <a  th:href="@{/articles/delete/{aId}(aId=*{getId()})}" class="btn btn-outline-info">Delete</a>
+    <div class="col-12 h-75">
+        <a th:href="@{/articles/edit/{aId}(aId=*{getId()})}" class="btn btn-outline-info">Edit</a>
+        <div class="float-end">
+
+
+            <a th:href="@{/articles/delete/{aId}(aId=*{getId()})}"
+               onclick="return confirm('Are yuo sure you want to delete this item')"
+               class="btn btn-outline-info">Delete</a>
         </div>
+        <article class="justify-content-center border border-dark rounded mt-1 overflow-auto p-3 text-light bg-primary"
+                 style="height: 100%;overflow: scroll;opacity: 0.7;" th:text="*{textContent}">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos, eaque eos excepturi, facere
+            hic
+            molestiae neque nulla, numquam soluta temporibus
+            tenetur voluptatem voluptatum! Consequuntur dignissimos eveniet explicabo nostrum rerum!
+        </article>
+        <div class="container-fluid pw-bold">
+            <span th:text="|Author : *{getAuthor().getUsername()}|">  </span>
+            <span class="float-end" th:text="|Created on : *{getCreatedOn()}|"></span>
 
-    <article class="justify-content-center border border-dark rounded mt-3 overflow-auto p-3"
-             style="height: 90%;overflow: scroll">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos, eaque eos excepturi, facere hic
-        molestiae neque nulla, numquam soluta temporibus
-        tenetur voluptatem voluptatum! Consequuntur dignissimos eveniet explicabo nostrum rerum!
-    </article>
-    <div class="container-fluid">
-        <span> Author : Some author </span>
-        <span class="float-end">Created on : Some static content</span>
-
+        </div>
     </div>
-
 </div>
 </body>
 </html>
