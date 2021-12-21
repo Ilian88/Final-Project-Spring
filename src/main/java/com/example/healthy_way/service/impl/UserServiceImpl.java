@@ -1,5 +1,6 @@
 package com.example.healthy_way.service.impl;
 
+import com.example.healthy_way.exception.DatabaseNotFoundException;
 import com.example.healthy_way.model.binding.AddRoleBindingModel;
 import com.example.healthy_way.model.entity.UserEntity;
 import com.example.healthy_way.model.enums.GenderEnum;
@@ -8,6 +9,7 @@ import com.example.healthy_way.model.serviceModel.UserServiceModel;
 import com.example.healthy_way.repository.UserRepository;
 import com.example.healthy_way.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity findUserByUsername(String username) {
-        return this.userRepository.findByUsername(username).orElse(null); // TODO : custom exception
+        return this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("No such user"));
     }
 
     @Override
